@@ -1,1 +1,1 @@
-/home/landilf/.config/RofiScripts/Dark-Light-Mode/Dunkel/dunkel.sh
+/home/landilf/.config/RofiScripts/Dark-Light-Mode/Hell/hell.sh

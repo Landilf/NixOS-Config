@@ -53,7 +53,7 @@ textbox {
 
 entry {
   hide-cursor-on-empty: true;
-  placeholder: " Suchen...";
+  placeholder: " Search...";
   placeholder-color: var(secondary);
   text-color: var(secondary);
   border: 0em;

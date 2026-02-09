@@ -1,1 +1,1 @@
-/home/landilf/.config/RofiScripts/Walls-light/wallrandom.sh
+/home/landilf/.config/RofiScripts/Walls/wallrandom.sh

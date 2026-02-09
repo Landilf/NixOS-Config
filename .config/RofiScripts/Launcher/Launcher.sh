@@ -1,16 +1,16 @@
 #! /bin/sh
 
-chosen=$(printf " Anwendungsstarter\n System\n󰅌 Zwischenablage\n󰃬 Taschenrechner\n Waybar\n Farbschema\n󰘇 Dekorationen\n󰥛 Animationen\n Hintergrundbild\n" | rofi -dmenu -i -m DP-3 -config '~/.config/RofiScripts/Launcher/L.rasi')
+chosen=$(printf " Apps Launcher\n System\n󰅌 Clipboard\n󰃬 Calculator\n Waybar\n Color Scheme\n󰘇 Decorations\n󰥛 Animations\n Wallpapers\n" | rofi -dmenu -i -m DP-3 -config '~/.config/RofiScripts/Launcher/L.rasi')
 
 case "$chosen" in
-   " Anwendungsstarter") rofi -show drun -m DP-3 ;;
+   " Apps Launcher") rofi -show drun -m DP-3 ;;
    " System") ~/.config/RofiScripts/SystemSettings/system.sh ;;
-   "󰅌 Zwischenablage") ~/.config/RofiScripts/Clipboard/Clipboard.sh ;;
-   "󰃬 Taschenrechner") ~/.config/RofiScripts/RofiCalc/Calc.sh ;;
+   "󰅌 Clipboard") ~/.config/RofiScripts/Clipboard/Clipboard.sh ;;
+   "󰃬 Calculator") ~/.config/RofiScripts/RofiCalc/Calc.sh ;;
    " Waybar") ~/.config/RofiScripts/Waybars/Waybar.sh ;;
-   " Farbschema") ~/.config/RofiScripts/Dark-Light-Mode/DLmode.sh ;;
-   "󰘇 Dekorationen") ~/.config/RofiScripts/Rounding/Rounding.sh ;;
-   "󰥛 Animationen") ~/.config/RofiScripts/Animations/Animations.sh ;;
-   " Hintergrundbild") ~/.config/RofiScripts/WallpaperChanger/WallMenu.sh ;;
+   " Color Scheme") ~/.config/RofiScripts/Dark-Light-Mode/DLmode.sh ;;
+   "󰘇 Decorations") ~/.config/RofiScripts/Rounding/Rounding.sh ;;
+   "󰥛 Animations") ~/.config/RofiScripts/Animations/Animations.sh ;;
+   " Wallpapers") ~/.config/RofiScripts/WallpaperChanger/WallMenu.sh ;;
    *) exit 1 ;;
 esac
