@@ -24,7 +24,7 @@ error-message {
 textbox {
   enabled: true;
   padding: 0.4em 0.54em 0.4em 0.54em;
-  str: "Keine Ergebnisse!";
+  str: "No results!";
   text-color: var(error);
   background-color: var(surface-container);
   border-radius: var(buttonradius);

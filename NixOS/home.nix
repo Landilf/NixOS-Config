@@ -169,7 +169,6 @@
 
   # User-specific packages
   home.packages = with pkgs; [
-    prismlauncher
     yazi
     vscodium
     git
@@ -197,7 +196,7 @@
     hypridle
     hyprlock
     hyprpolkitagent
-#    discord
+    discord
     nautilus
     file-roller
     stow
@@ -214,6 +213,5 @@
     zenity
     nitch
     telegram-desktop
-    polkit_gnome
   ];
 }

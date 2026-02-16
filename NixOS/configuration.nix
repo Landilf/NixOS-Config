@@ -2,7 +2,7 @@
 
 {
 
-  imports = [
+    imports = [
     ./hardware-configuration.nix
   ];
 
@@ -12,29 +12,11 @@
 
   # Use latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  boot.kernelParams = [
-    "nvidia-drm.modeset=1"
-  ];
-
-  boot.kernel.sysctl = {
-    "net.ipv4.ip_forward" = 1;
-    "net.ipv6.conf.all.forwarding" = 1;
-  };
-
+  
   # Networking
   networking.hostName = "nix-btw";
   networking.networkmanager.enable = true;
-#  networking.firewall.enable = true;
-#  networking.firewall.checkReversePath = "loose";
-
-  networking.firewall = {
-    enable = true;
-    checkReversePath = "loose";
-    trustedInterfaces = [ "throne-tun" ];
-    allowedTCPPorts = [ 27015 27036 27037 ];
-    allowedUDPPorts = [ 10400 10401 27015 27036 ];
-  };
+  networking.firewall.enable = true;
 
   security.wrappers.Throne = {
     source = "${pkgs-unstable.throne}/bin/Throne";
@@ -42,7 +24,7 @@
     group = "root";
     capabilities = "cap_net_admin+ep";
   };
-
+  
   # KDE Connect Configuration
   programs.kdeconnect.package = pkgs.kdePackages.kdeconnect-kde;
   programs.kdeconnect.enable = true;
@@ -92,6 +74,9 @@
   
   # Shell (required for user shell)
   programs.fish.enable = true;
+
+  # SSH configuration
+  programs.ssh.startAgent = true;
   
   # Gaming
   programs.steam = {
