@@ -16,6 +16,7 @@
   # Networking
   networking.hostName = "nix-btw";
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.powersave = false;
   networking.firewall.enable = true;
 
   security.wrappers.Throne = {
@@ -77,6 +78,12 @@
 
   # SSH configuration
   programs.ssh.startAgent = true;
+
+  # Java configuration
+  programs.java = {
+    enable = true;
+    package = pkgs.jdk21;
+  };
   
   # Gaming
   programs.steam = {
@@ -160,27 +167,31 @@
   # System packages (only system-level stuff)
   environment.systemPackages = 
     (with pkgs-unstable; [
+      gemini-cli
       throne
     ])
     ++ (with pkgs; [
       inputs.matugen.packages.${pkgs.stdenv.hostPlatform.system}.default
-      vim
-      killall
-      sddm-astronaut
-      libsForQt5.qt5ct
-      kdePackages.qt6ct
-      kdePackages.kstatusnotifieritem
-      gnome-themes-extra
       alsa-plugins
       bluez
+      docker
+      docker-compose
       font-awesome
+      fzf
+      gnome-themes-extra
+      jdk21
+      kdePackages.kstatusnotifieritem
+      kdePackages.qt6ct
+      killall
       libnotify
       libqalculate
+      libsForQt5.qt5ct
       mangohud
-      winetricks
-      openrgb-with-all-plugins
       nix-search-tv
-      fzf
+      openrgb-with-all-plugins
+      sddm-astronaut
+      vim
+      winetricks
       xrandr
     ]);
 

@@ -104,7 +104,7 @@
       };
     };
   };
-  
+
   # KDE Connect configuration
   services.kdeconnect = {
     package = 
@@ -169,49 +169,54 @@
 
   # User-specific packages
   home.packages = with pkgs; [
-    yazi
-    vscodium
-    git
-    gimp
-    gthumb
-    imv
-    cava
-    waybar
-    swww
-    btop
-    brightnessctl
-    hyprpicker
-    hyprshot
-    cliphist
-    wl-clipboard
-    wl-clip-persist
-    pamixer
-    pavucontrol
-    eza
-    pywalfox-native
-    swaynotificationcenter
-    nwg-look
-    nwg-dock-hyprland
     adw-gtk3
-    hypridle
-    hyprlock
-    hyprpolkitagent
-    discord
-    nautilus
-    file-roller
-    stow
+    android-studio
     ani-cli
     asciiquarium-transparent
-    cbonsai
-    unimatrix
-    spotify
-    kdePackages.kamera
-    gnome-clocks
-    decibels
-    dconf-editor
     blueman
-    zenity
+    brightnessctl
+    btop
+    cava
+    cbonsai
+    cliphist
+    dconf-editor
+    decibels
+    discord
+    eza
+    file-roller
+    gimp
+    git
+    gnome-clocks
+    gthumb
+    hypridle
+    hyprlock
+    hyprpicker
+    hyprpolkitagent
+    hyprshot
+    imv
+    jetbrains.idea
+    kdePackages.kamera
+    nautilus
     nitch
+    nwg-dock-hyprland
+    nwg-look
+    pamixer
+    pavucontrol
+    python3
+    python3Packages.pip
+    python3Packages.virtualenv
+    pywalfox-native
+    spotify
+    stow
+    swaynotificationcenter
+    swww
     telegram-desktop
+    unimatrix
+    vscodium
+    waybar
+    wl-clip-persist
+    wl-clipboard
+    yazi
+    zenity
   ];
 }
