@@ -56,7 +56,7 @@
   users.users.landilf = {
     isNormalUser = true;
     description = "Landilf";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.fish;
   };
 
@@ -84,6 +84,9 @@
     enable = true;
     package = pkgs.jdk21;
   };
+
+  # Docker configuration
+  virtualisation.docker.enable = true;
   
   # Gaming
   programs.steam = {
@@ -176,6 +179,8 @@
       bluez
       docker
       docker-compose
+      lazydocker
+      lazygit
       font-awesome
       fzf
       gnome-themes-extra
