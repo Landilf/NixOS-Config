@@ -12,13 +12,28 @@
 
   # Use latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  
+
+  # Time Settings
+  time.hardwareClockInLocalTime = true;
+
+  # Boot customization
+  boot.plymouth = {
+    enable = true;
+    themePackages = [ pkgs.adi1090x-plymouth-themes ];
+    theme = "lone";
+  };
+  boot.kernelParams = [ "quiet" "splash" "boot.shell_on_fail" "loglevel=3" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" ];
+  boot.consoleLogLevel = 0;
+  boot.initrd.verbose = false;
+  boot.initrd.kernelModules = [ "amdgpu" ];
+
   # Networking
   networking.hostName = "nix-btw";
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
   networking.firewall.enable = true;
 
+  # Throne Settings
   security.wrappers.Throne = {
     source = "${pkgs-unstable.throne}/bin/Throne";
     owner = "root";
@@ -56,7 +71,7 @@
   users.users.landilf = {
     isNormalUser = true;
     description = "Landilf";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
     shell = pkgs.fish;
   };
 
@@ -185,15 +200,16 @@
       bluez
       docker
       docker-compose
-      lazydocker
-      lazygit
       font-awesome
+      freerdp
       fzf
       gnome-themes-extra
       jdk21
       kdePackages.kstatusnotifieritem
       kdePackages.qt6ct
       killall
+      lazydocker
+      lazygit
       libnotify
       libqalculate
       libsForQt5.qt5ct
@@ -205,7 +221,6 @@
       vim
       winetricks
       xrandr
-      freerdp
     ]);
 
   # Fonts
@@ -217,7 +232,7 @@
   ];
   
   # Udev Settings
- 
+
   # Teevolution Terra
  services.udev.extraRules = ''
     # Teevolution Terra
@@ -242,7 +257,6 @@
     SUBSYSTEM=="hidraw", ATTRS{idVendor}=="31e3", MODE="0666", TAG+="uaccess"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="31e3", MODE="0666", TAG+="uaccess"
   '';
-
 
   # Nix optimization
   nix.gc = {
