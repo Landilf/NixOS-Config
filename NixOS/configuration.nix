@@ -8,6 +8,8 @@
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.timeout = 0;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel
@@ -22,7 +24,8 @@
     themePackages = [ pkgs.adi1090x-plymouth-themes ];
     theme = "lone";
   };
-  boot.kernelParams = [ "quiet" "splash" "boot.shell_on_fail" "loglevel=3" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" ];
+
+  boot.kernelParams = [ "quiet" "splash" "boot.shell_on_fail" "loglevel=3" "rd.systemd.show_status=false" "rd.udev.log_level=0" "udev.log_priority=0" ];
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
   boot.initrd.kernelModules = [ "amdgpu" ];
@@ -190,12 +193,12 @@
       yandex-music
     ])
     ++ [
-      winapps.packages."${pkgs.system}".winapps
-      winapps.packages."${pkgs.system}".winapps-launcher
+      winapps.packages."${config.nixpkgs.hostPlatform.system}".winapps
+      winapps.packages."${config.nixpkgs.hostPlatform.system}".winapps-launcher
     ]
     ++ (with pkgs; [
-      inputs.matugen.packages.${pkgs.system}.default
-      inputs.prism-cracked.packages.${pkgs.system}.prismlauncher
+      inputs.matugen.packages.${config.nixpkgs.hostPlatform.system}.default
+      inputs.prism-cracked.packages.${config.nixpkgs.hostPlatform.system}.prismlauncher
       alsa-plugins
       bluez
       docker
