@@ -9,11 +9,11 @@
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 5;
-  boot.loader.timeout = 0;
+  boot.loader.timeout = 5;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # Time Settings
   time.hardwareClockInLocalTime = true;
@@ -144,7 +144,7 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
   # OpenRGB
@@ -188,6 +188,7 @@
   # System packages (only system-level stuff)
   environment.systemPackages = 
     (with pkgs-unstable; [
+      easyeffects
       gemini-cli
       throne
       yandex-music
