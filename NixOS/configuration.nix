@@ -2,14 +2,14 @@
 
 {
 
-    imports = [
+  imports = [
     ./hardware-configuration.nix
   ];
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 5;
-  boot.loader.timeout = 5;
+  boot.loader.timeout = 0;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel
@@ -130,21 +130,32 @@
     enable32Bit = true;
     extraPackages = with pkgs; [
       nvidia-vaapi-driver
+      libva-vdpau-driver
+      libvdpau-va-gl
     ];
   };
   hardware.opentabletdriver = {
     enable = false;
   };
 
-  # NVIDIA
-  services.xserver.videoDrivers = ["nvidia"];
+  # NVIDIA + AMD Prime
+  services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.production;
+
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      nvidiaBusId = "PCI:1:0:0";
+      amdgpuBusId = "PCI:54:0:0";
+    };
   };
 
   # OpenRGB
@@ -218,6 +229,7 @@
       libqalculate
       libsForQt5.qt5ct
       mangohud
+      micro
       neo
       nix-search-tv
       openrgb-with-all-plugins
