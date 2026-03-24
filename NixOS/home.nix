@@ -220,7 +220,6 @@
     asciiquarium-transparent
     blueman
     brightnessctl
-    btop
     cava
     cbonsai
     cliphist

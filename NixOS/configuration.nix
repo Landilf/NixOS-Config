@@ -235,6 +235,7 @@
       libsForQt5.qt5ct
       mangohud
       micro
+      mission-center
       neo
       nix-search-tv
       openrgb-with-all-plugins
