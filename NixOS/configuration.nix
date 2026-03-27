@@ -59,8 +59,6 @@
       CPU_MAX_PERF_ON_AC = 100;
       CPU_MAX_PERF_ON_BAT = 70;
 
-      WIFI_PWR_ON_AC = "off";
-      WIFI_PWR_ON_BAT = "on";
       RUNTIME_PM_ON_AC = "on";
       RUNTIME_PM_ON_BAT = "auto";
     };
@@ -252,7 +250,6 @@
       freerdp
       fzf
       gnome-themes-extra
-      jdk21
       kdePackages.kstatusnotifieritem
       kdePackages.qt6ct
       killall
@@ -261,7 +258,6 @@
       libnotify
       libqalculate
       libsForQt5.qt5ct
-      linuxPackages.cpupower
       mangohud
       micro
       mission-center
