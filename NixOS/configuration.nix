@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, pkgs-unstable, system, winapps, ... }:
+{ config, pkgs, inputs, pkgs-unstable, system, winapps, lib, ... }:
 
 {
 
@@ -25,7 +25,8 @@
     theme = "lone";
   };
 
-  boot.kernelParams = [ "quiet" "splash" "boot.shell_on_fail" "loglevel=3" "rd.systemd.show_status=false" "rd.udev.log_level=0" "udev.log_priority=0" ];
+  boot.kernelParams = [ "quiet" "splash" "boot.shell_on_fail" "loglevel=3" "rd.systemd.show_status=false" "rd.udev.log_level=0" "udev.log_priority=0" "resume=UUID=c0428711-04a3-4adf-998d-d88af1d26e71" ];
+  boot.resumeDevice = "/dev/disk/by-uuid/c0428711-04a3-4adf-998d-d88af1d26e71";
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
   boot.initrd.kernelModules = [ "amdgpu" ];
@@ -35,6 +36,33 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
   networking.firewall.enable = true;
+
+  # Hibernation when closing the laptop lid
+  services.logind.settings.Login = {
+    HandleLidSwitch = "hibernate";
+    HandleLidSwitchExternalPower = "hibernate";
+  };
+
+  # Power profiles
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
+
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MAX_PERF_ON_BAT = 70;
+
+      RUNTIME_PM_ON_AC = "on";
+      RUNTIME_PM_ON_BAT = "auto";
+    };
+  };
 
   # Throne Settings
   security.wrappers.Throne = {
@@ -74,9 +102,12 @@
   users.users.landilf = {
     isNormalUser = true;
     description = "Landilf";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "video" "input" ];
     shell = pkgs.fish;
   };
+
+  # SwayOSD udev rules
+  services.udev.packages = [ pkgs.swayosd ];
 
   # Home Manager
   home-manager.useUserPackages = true;
@@ -159,8 +190,11 @@
   };
 
   # OpenRGB
-  services.hardware.openrgb.enable = true; 
-  services.hardware.openrgb.motherboard = "amd";
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+  };
+  systemd.services.openrgb.wantedBy = lib.mkForce [];
 
   # Audio
   services.pipewire = {
@@ -215,11 +249,11 @@
       bluez
       docker
       docker-compose
+      flameshot
       font-awesome
       freerdp
       fzf
       gnome-themes-extra
-      jdk21
       kdePackages.kstatusnotifieritem
       kdePackages.qt6ct
       killall
@@ -230,9 +264,11 @@
       libsForQt5.qt5ct
       mangohud
       micro
+      mission-center
       neo
       nix-search-tv
       openrgb-with-all-plugins
+      powertop
       pwvucontrol
       sddm-astronaut
       tenacity

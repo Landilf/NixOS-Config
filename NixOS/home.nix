@@ -36,29 +36,29 @@
 
     # ---- Microsoft Word ----
     "application/msword" =
-      [ "word-o365.desktop" ];
+      [ "word-o365-x86.desktop" ];
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
-      [ "word-o365.desktop" ];
+      [ "word-o365-x86.desktop" ];
     "application/vnd.openxmlformats-officedocument.wordprocessingml.template" =
-      [ "word-o365.desktop" ];
+      [ "word-o365-x86.desktop" ];
 
     # ---- Microsoft Excel ----
     "application/vnd.ms-excel" =
-      [ "excel-o365.desktop" ];
+      [ "excel-o365-x86.desktop" ];
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" =
-      [ "excel-o365.desktop" ];
+      [ "excel-o365-x86.desktop" ];
     "application/vnd.openxmlformats-officedocument.spreadsheetml.template" =
-      [ "excel-o365.desktop" ];
+      [ "excel-o365-x86.desktop" ];
 
     # ---- Microsoft PowerPoint ----
     "application/vnd.ms-powerpoint" =
-      [ "powerpoint-o365.desktop" ];
+      [ "powerpoint-o365-x86.desktop" ];
     "application/vnd.openxmlformats-officedocument.presentationml.presentation" =
-      [ "powerpoint-o365.desktop" ];
+      [ "powerpoint-o365-x86.desktop" ];
     "application/vnd.openxmlformats-officedocument.presentationml.template" =
-      [ "powerpoint-o365.desktop" ];
+      [ "powerpoint-o365-x86.desktop" ];
     "application/vnd.openxmlformats-officedocument.presentationml.slideshow" =
-      [ "powerpoint-o365.desktop" ];
+      [ "powerpoint-o365-x86.desktop" ];
 
     # Audio
     "audio/mpeg" = [ "org.gnome.Decibels.desktop" ];
@@ -127,8 +127,8 @@
       cff = "reset && nitch";  
       ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
       ls = "eza -la";
-      dcu = "docker compose -f ~/winapps/docker-compose.yaml up -d";
-      dcd = "docker compose -f ~/winapps/docker-compose.yaml down";
+      dcu = "docker compose -f ~/winapps/compose.yaml up -d";
+      dcd = "docker compose -f ~/winapps/compose.yaml down";
 
     };
   };
@@ -149,6 +149,9 @@
       };
     };
   };
+
+  # SwayOSD service
+  services.swayosd.enable = true;
 
   # KDE Connect configuration
   services.kdeconnect = {
@@ -220,7 +223,6 @@
     asciiquarium-transparent
     blueman
     brightnessctl
-    btop
     cava
     cbonsai
     cliphist
@@ -232,6 +234,7 @@
     gimp
     git
     gnome-clocks
+    grim
     gthumb
     heroic
     hypridle
@@ -239,6 +242,7 @@
     hyprpicker
     hyprpolkitagent
     hyprshot
+    hyprsunset
     imv
     jetbrains.idea
     kdePackages.kamera
@@ -253,10 +257,12 @@
     python3Packages.pip
     python3Packages.virtualenv
     pywalfox-native
+    slurp
     stow
     swaynotificationcenter
     swww
     telegram-desktop
+    tesseract
     unimatrix
     vscodium
     waybar
