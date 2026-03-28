@@ -30,6 +30,12 @@
     "on-click-middle": "swaync-client -R; swaync-client -rs",
     "escape": true
 	                     }, 
+"custom/kb_layout": {
+  "tooltip": false,
+  "format": "{}",
+  "exec": "bash ~/.config/waybar/scripts/kb_layout.sh --watch",
+  "on-click": "bash ~/.config/waybar/scripts/kb_layout.sh --toggle"
+},
 "hyprland/window": {
   "format": "{title}",
   "max-length": 80,
