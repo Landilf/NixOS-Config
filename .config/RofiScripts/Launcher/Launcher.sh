@@ -1,9 +1,30 @@
 #! /bin/sh
 
-chosen=$(printf " Apps Launcher\n System\n󰅌 Clipboard\n󰃬 Calculator\n Waybar\n Color Scheme\n󰘇 Decorations\n󰥛 Animations\n Wallpapers\n" | rofi -dmenu -i -m DP-3 -config '~/.config/RofiScripts/Launcher/L.rasi')
+: "${LC_ALL:=C.UTF-8}"
+: "${LANG:=C.UTF-8}"
+export LC_ALL LANG
+
+chosen=$(
+	printf "%s\n" \
+		" Apps Launcher" \
+		" System" \
+		"󰅌 Clipboard" \
+		"󰃬 Calculator" \
+		" Waybar" \
+			" Color Scheme" \
+			"󰘇 Decorations" \
+			"󰥛 Animations" \
+			" Wallpapers" |
+			rofi -dmenu -i -config "$HOME/.config/RofiScripts/Launcher/L.rasi" -kb-move-char-back "" -kb-move-char-forward "" -kb-custom-1 "Left" -kb-accept-entry "Control+j,Control+m,Return,KP_Enter,Right"
+)
+rc=$?
+
+if [ "$rc" -eq 10 ]; then
+	exit 0
+fi
 
 case "$chosen" in
-   " Apps Launcher") rofi -show drun -m DP-3 ;;
+   " Apps Launcher") rofi -show drun ;;
    " System") ~/.config/RofiScripts/SystemSettings/system.sh ;;
    "󰅌 Clipboard") ~/.config/RofiScripts/Clipboard/Clipboard.sh ;;
    "󰃬 Calculator") ~/.config/RofiScripts/RofiCalc/Calc.sh ;;

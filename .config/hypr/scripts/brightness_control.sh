@@ -3,7 +3,7 @@
 # Limit settings in percent
 LIMIT_MIN_PC=0
 LIMIT_MAX_PC=50
-STEP_PC=4
+STEP_PC=2
 
 # Get hardware data
 MAX_RAW=$(brightnessctl m)

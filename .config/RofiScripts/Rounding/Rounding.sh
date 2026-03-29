@@ -1,6 +1,25 @@
 #! /bin/sh
 
-chosen=$(printf "Square\nGentle Round\nRound\n" | rofi -dmenu -i -m DP-3 -config '~/.config/RofiScripts/Rounding/R.rasi')
+: "${LC_ALL:=C.UTF-8}"
+: "${LANG:=C.UTF-8}"
+export LC_ALL LANG
+
+back_label="← Back"
+
+	chosen=$(
+		printf "%s\n" \
+			"$back_label" \
+			"Square" \
+			"Gentle Round" \
+			"Round" |
+			rofi -dmenu -i -config "$HOME/.config/RofiScripts/Rounding/R.rasi" -kb-move-char-back "" -kb-move-char-forward "" -kb-custom-1 "Left" -kb-accept-entry "Control+j,Control+m,Return,KP_Enter,Right"
+	)
+	rc=$?
+
+if [ "$rc" -eq 10 ] || [ "$chosen" = "$back_label" ]; then
+	~/.config/RofiScripts/Launcher/Launcher.sh
+	exit 0
+fi
 
 case "$chosen" in
    "Square") ~/.config/RofiScripts/Rounding/RoundingThemes/0px/pointy.sh ;;

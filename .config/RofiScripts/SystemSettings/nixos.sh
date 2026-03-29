@@ -1,6 +1,25 @@
 #! /bin/sh
 
-chosen=$(printf " Configuration\n󰋜 Home Manager\n Flake" | rofi -dmenu -i -m DP-3 -config '~/.config/RofiScripts/SystemSettings/S.rasi')
+: "${LC_ALL:=C.UTF-8}"
+: "${LANG:=C.UTF-8}"
+export LC_ALL LANG
+
+back_label="← Back"
+
+	chosen=$(
+		printf "%s\n" \
+			"$back_label" \
+			" Configuration" \
+			"󰋜 Home Manager" \
+			" Flake" |
+			rofi -dmenu -i -config "$HOME/.config/RofiScripts/SystemSettings/S.rasi" -kb-move-char-back "" -kb-move-char-forward "" -kb-custom-1 "Left" -kb-accept-entry "Control+j,Control+m,Return,KP_Enter,Right"
+	)
+	rc=$?
+
+if [ "$rc" -eq 10 ] || [ "$chosen" = "$back_label" ]; then
+	~/.config/RofiScripts/SystemSettings/system.sh
+	exit 0
+fi
 
 case "$chosen" in
    " Configuration") codium ~/Hyprland-Dotfiles/NixOS/configuration.nix ;;
