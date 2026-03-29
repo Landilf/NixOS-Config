@@ -99,13 +99,14 @@
 },
 "clock": {
   "timezone": "Europe/Moscow",
-  "tooltip-format": "<big>{:L%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+  "locale": "en_US.UTF-8",
+  "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
   "format" : " {:%H:%M}",
-  "format-alt" : "󰸗 {:L%a %d.%m.%y}", 
+  "format-alt" : "󰸗 {:%a %d.%m.%y}", 
     "calendar": {
     "mode"          : "year",
 "mode-mon-col"  : 3,
-"weeks-pos"     : "right",
+"weeks-pos"     : "",
 "on-scroll"     : 1,
 "format": {
 "months":     "<span><b>{}</b></span>",

@@ -44,13 +44,12 @@ entry {
 }
 
 listview {
-  lines: 10;
   margin: 0em;
   padding: 0.8em 0em 0em 0em;
   columns: 1;
   fixed-columns: false;
   background-color: transparent;
-  scrollbar: true;
+  scrollbar: false;
   cycle: false;
   border: 0em;
   border-color: var(primary);

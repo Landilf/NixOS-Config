@@ -11,7 +11,7 @@ back_label="← Back"
 			"$back_label" \
 			"󰌧 Select Wallpaper" \
 			" Random Wallpapers" |
-			rofi -dmenu -i -config "$HOME/.config/RofiScripts/WallpaperChanger/WM.rasi" -kb-move-char-back "" -kb-move-char-forward "" -kb-custom-1 "Left" -kb-accept-entry "Control+j,Control+m,Return,KP_Enter,Right"
+			rofi -dmenu -i -selected-row 1 -config "$HOME/.config/RofiScripts/WallpaperChanger/WM.rasi" -kb-move-char-back "" -kb-move-char-forward "" -kb-custom-1 "Left" -kb-accept-entry "Control+j,Control+m,Return,KP_Enter,Right"
 	)
 	rc=$?
 
