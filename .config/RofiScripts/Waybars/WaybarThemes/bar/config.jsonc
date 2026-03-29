@@ -15,6 +15,7 @@
  "custom/System",
  "custom/notifications",
  "hyprland/workspaces",
+ "custom/kb_layout",
  "clock",
  
 ],

@@ -16,7 +16,7 @@
   boot.kernelPackages = pkgs.linuxPackages;
 
   # Time Settings
-  time.hardwareClockInLocalTime = true;
+  time.hardwareClockInLocalTime = false;
 
   # Boot customization
   boot.plymouth = {
@@ -233,8 +233,9 @@
   # System packages (only system-level stuff)
   environment.systemPackages = 
     (with pkgs-unstable; [
+      codex
       easyeffects
-      gemini-cli
+      freerdp
       throne
       yandex-music
     ])
@@ -251,7 +252,7 @@
       docker-compose
       flameshot
       font-awesome
-      freerdp
+      pkgs-unstable.
       fzf
       gnome-themes-extra
       kdePackages.kstatusnotifieritem

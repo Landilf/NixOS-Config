@@ -245,6 +245,7 @@
     hyprsunset
     imv
     jetbrains.idea
+    jq
     kdePackages.kamera
     nautilus
     nitch
@@ -258,6 +259,7 @@
     python3Packages.virtualenv
     pywalfox-native
     slurp
+    socat
     stow
     swaynotificationcenter
     swww

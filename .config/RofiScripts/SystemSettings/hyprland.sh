@@ -1,6 +1,35 @@
 #! /bin/sh
 
-chosen=$(printf "󱓞 Autostart\n󰪫 Environment\n󰍽 Input\n󰌌 Keybindings\n Look and Feel\n󰍹 Monitors\n Permissions\n Programs\n Plugins\n Windows and Workspaces\n󰥛 Animations (Variables!)\n󰘇 Decoration (Variables!)\n" | rofi -dmenu -i -m DP-3 -config '~/.config/RofiScripts/SystemSettings/S.rasi')
+: "${LC_ALL:=C.UTF-8}"
+: "${LANG:=C.UTF-8}"
+export LC_ALL LANG
+
+back_label="← Back"
+
+chosen=$(
+	printf "%s\n" \
+		"$back_label" \
+		"󱓞 Autostart" \
+		"󰪫 Environment" \
+		"󰍽 Input" \
+		"󰌌 Keybindings" \
+		" Look and Feel" \
+		"󰍹 Monitors" \
+		" Permissions" \
+		" Programs" \
+		" Plugins" \
+		"󰆍 Scripts" \
+		" Windows and Workspaces" \
+		"󰥛 Animations (Variables!)" \
+		"󰘇 Decoration (Variables!)" |
+		rofi -dmenu -i -selected-row 1 -config "$HOME/.config/RofiScripts/SystemSettings/S_hyprland.rasi" -kb-move-char-back "" -kb-move-char-forward "" -kb-custom-1 "Left" -kb-accept-entry "Control+j,Control+m,Return,KP_Enter,Right"
+)
+rc=$?
+
+if [ "$rc" -eq 10 ] || [ "$chosen" = "$back_label" ]; then
+	~/.config/RofiScripts/SystemSettings/system.sh
+	exit 0
+fi
 
 case "$chosen" in
    "󱓞 Autostart") codium ~/.config/hypr/hyprconfigs/hyprautostart.conf ;;
@@ -12,6 +41,7 @@ case "$chosen" in
    " Permissions") codium ~/.config/hypr/hyprconfigs/hyprpermissions.conf ;;
    " Programs") codium ~/.config/hypr/hyprconfigs/hyprprograms.conf ;;
    " Plugins") codium ~/.config/hypr/hyprconfigs/hyprplugins.conf ;;
+   "󰆍 Scripts") ~/.config/RofiScripts/SystemSettings/scripts.sh ;;
    " Windows and Workspaces") codium ~/.config/hypr/hyprconfigs/hyprwindowsandworkspaces.conf ;;
    "󰥛 Animations (Variables!)") codium ~/.config/hypr/hyprconfigs/hypranimations.conf ;;
    "󰘇 Decoration (Variables!)") codium ~/.config/hypr/hyprconfigs/hyprdecoration.conf ;;
