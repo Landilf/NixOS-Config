@@ -1,5 +1,34 @@
 { config, pkgs, ... }:
 
+let
+  ideaVersion = "2025.2.6.1";
+  ideaUltimatePinned = pkgs.jetbrains.idea.overrideAttrs (_old: {
+    version = ideaVersion;
+    src = pkgs.fetchurl {
+      url = "https://download.jetbrains.com/idea/ideaIU-${ideaVersion}.tar.gz";
+      hash = "sha256-TOix8nLmQn3nCYmk5BQFSGuXxO8urN3Zv70bv5EtP7I=";
+    };
+  });
+  ideaVmOptions = pkgs.writeText "idea64.vmoptions" ''
+    -javaagent:/home/landilf/ProgrammingSoftware/JetBrains/jetbra/ja-netfilter.jar=jetbrains 
+    --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED 
+    --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED
+  '';
+  ideaUltimateWrapped = ideaUltimatePinned.overrideAttrs (old: {
+    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.makeWrapper ];
+    postFixup =
+      (old.postFixup or "")
+      + ''
+        if [ -x "$out/bin/idea-ultimate" ]; then
+          wrapProgram "$out/bin/idea-ultimate" --set IDEA_VM_OPTIONS "${ideaVmOptions}"
+        fi
+
+        if [ -x "$out/bin/idea" ]; then
+          wrapProgram "$out/bin/idea" --set IDEA_VM_OPTIONS "${ideaVmOptions}"
+        fi
+      '';
+  });
+in
 {
 
   imports = [
@@ -130,6 +159,38 @@
     
           echo "🎮 PS5 Controller: [$bar] $capacity% ($battery_status)"
       '';
+      dcu = ''
+          set -l compose_args
+          set -l up_args
+
+          if test (count $argv) -ge 2; and test "$argv[1]" = "-f"
+            set compose_args -f $argv[2]
+            set up_args $argv[3..-1]
+          else if test (count $argv) -ge 1; and test -f $argv[1]
+            set compose_args -f $argv[1]
+            set up_args $argv[2..-1]
+          else
+            set up_args $argv
+          end
+
+          docker compose $compose_args up -d $up_args
+      '';
+      dcd = ''
+          set -l compose_args
+          set -l down_args
+
+          if test (count $argv) -ge 2; and test "$argv[1]" = "-f"
+            set compose_args -f $argv[2]
+            set down_args $argv[3..-1]
+          else if test (count $argv) -ge 1; and test -f $argv[1]
+            set compose_args -f $argv[1]
+            set down_args $argv[2..-1]
+          else
+            set down_args $argv
+          end
+
+          docker compose $compose_args down $down_args
+      '';
       kitty-theme = ''
           for socket in /tmp/kitty-*
             kitty @ --to unix:$socket set-colors ~/.config/kitty/themes/Matugen.conf
@@ -148,8 +209,9 @@
       cff = "reset && nitch";  
       ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
       ls = "eza -la";
-      dcu = "docker compose -f ~/winapps/compose.yaml up -d";
-      dcd = "docker compose -f ~/winapps/compose.yaml down";
+      dc = "docker compose";
+      dcuw = "dcu ~/winapps/compose.yaml";
+      dcdw = "dcd ~/winapps/compose.yaml";
 
     };
   };
@@ -273,7 +335,7 @@
     hyprshot
     hyprsunset
     imv
-    jetbrains.idea
+    ideaUltimateWrapped
     jq
     kdePackages.kamera
     nautilus
