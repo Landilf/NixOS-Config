@@ -235,7 +235,6 @@
     (with pkgs-unstable; [
       codex
       easyeffects
-      freerdp
       throne
       yandex-music
     ])
@@ -253,6 +252,7 @@
       docker-compose
       flameshot
       font-awesome
+      freerdp
       fzf
       gnome-themes-extra
       kdePackages.kstatusnotifieritem
