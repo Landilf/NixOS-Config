@@ -107,7 +107,7 @@
 },
 "clock": {
   "timezone": "Europe/Moscow",
-  "locale": "en_US.UTF-8",
+  "locale": "ru_RU.UTF-8",
   "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
   "format" : " {:%H:%M}",
   "format-alt" : "󰸗 {:%a %d.%m.%y}", 
